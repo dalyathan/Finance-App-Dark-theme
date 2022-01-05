@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/widgets/custom_clipper.dart';
 
+//fot the design https://dribbble.com/shots/17195869-Finance-Dark-theme-Design/attachments/12296436?mode=media
 class FinanceDarkTheme extends StatelessWidget {
   FinanceDarkTheme({Key? key}) : super(key: key);
 
