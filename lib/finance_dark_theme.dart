@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/widgets/circular_clipper.dart';
-import 'package:portfolio/widgets/rectangular_clipper.dart';
-import 'package:portfolio/widgets/triangular_clipper.dart';
+import 'package:portfolio/widgets/clippers/rectangular_clipper.dart';
+import 'package:portfolio/widgets/clippers/triangular_clipper.dart';
+import 'package:portfolio/widgets/containers/circular_widget.dart';
+import 'package:portfolio/widgets/icons/octagon_icon.dart';
+import 'package:portfolio/widgets/painters/person_painter.dart';
+
+import 'model/CircularWidgetState.dart';
 
 //fot the design https://dribbble.com/shots/17195869-Finance-Dark-theme-Design/attachments/12296436?mode=media
 class FinanceDarkTheme extends StatelessWidget {
   FinanceDarkTheme({Key? key}) : super(key: key);
+  bool isTextfieldFocused = false;
+  final _fieldController = TextEditingController();
 
   final ThemeData specialThemeData = ThemeData(
     brightness: Brightness.dark,
@@ -27,16 +33,37 @@ class FinanceDarkTheme extends StatelessWidget {
         body: SafeArea(
           child: Padding(
               padding: EdgeInsets.all(size.width * 0.1),
-              child: Column(
-                children: [
-                  row1(size),
-                  SizedBox(height: size.height * 0.15),
-                  row2(size),
-                  SizedBox(height: size.height * 0.075),
-                  row3(size)
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    row1(size),
+                    SizedBox(height: size.height * 0.15),
+                    row2(size),
+                    SizedBox(height: size.height * 0.075),
+                    row3(size),
+                    SizedBox(height: size.height * 0.075),
+                    CustomPaint(
+                      size: Size(size.width * 0.1, size.width * 0.1),
+                      painter: PersonPainter(),
+                    )
+                  ],
+                ),
               )),
         ),
+      ),
+    );
+  }
+
+  Widget row(CircularWidgetState leftChildState,
+      CircularWidgetState rightChildState, Size size) {
+    return SizedBox(
+      height: size.height * 0.2,
+      child: Row(
+        children: [
+          CircularWidget(leftChildState),
+          SizedBox(width: size.width * 0.05),
+          CircularWidget(rightChildState)
+        ],
       ),
     );
   }
@@ -45,20 +72,24 @@ class FinanceDarkTheme extends StatelessWidget {
     return SizedBox(
       height: size.height * 0.125,
       child: Stack(children: [
-        TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(size.height * 0.05),
+        Focus(
+          onFocusChange: (value) => isTextfieldFocused = value,
+          child: TextField(
+            controller: _fieldController,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(size.height * 0.05),
+                ),
               ),
             ),
           ),
         ),
-        Positioned(
-          top: size.height * 0.005,
-          left: size.width * 0.225,
-          child: Opacity(
-            opacity: 0.2,
+        Visibility(
+          visible: isTextfieldFocused == false && _fieldController.text.isEmpty,
+          child: Positioned(
+            top: size.height * 0.005,
+            left: size.width * 0.225,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -66,14 +97,16 @@ class FinanceDarkTheme extends StatelessWidget {
                   clipper: CustomRectangularClipper(),
                   child: Icon(
                     Icons.search,
+                    color: Colors.grey[600],
                     size: size.height * 0.065,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 8.0),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text(
                     'Search',
-                    style: TextStyle(fontWeight: FontWeight.w100),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w100, color: Colors.grey[600]),
                   ),
                 )
               ],
@@ -82,7 +115,6 @@ class FinanceDarkTheme extends StatelessWidget {
         )
       ]),
     );
-    //);
   }
 
   Widget row1(Size size) {
@@ -121,11 +153,11 @@ class FinanceDarkTheme extends StatelessWidget {
           children: const [
             Text(
               'Hello David',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
             ),
-            Text('Welcome Back',
+            Text('Welcome Back !',
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 18,
                 ))
           ],
         ),
