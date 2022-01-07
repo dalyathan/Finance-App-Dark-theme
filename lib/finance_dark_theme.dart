@@ -49,51 +49,52 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
       child: Scaffold(
         body: SafeArea(
           child: Padding(
-              padding: EdgeInsets.all(size.width * 0.1),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    row1(size),
-                    SizedBox(height: size.height * 0.075),
-                    row2(size),
-                    SizedBox(height: size.height * 0.075),
-                    row3(size),
-                    SizedBox(height: size.height * 0.025),
-                    row(
-                        CircularWidgetState(
-                            const Color(0xe6dff1ff),
-                            Padding(
-                              padding: EdgeInsets.all(size.width * 0.01),
-                              child: SalesIcon(
-                                size: size.width * 0.06,
-                              ),
-                            ),
-                            "230k",
-                            "Sales"),
-                        CircularWidgetState(
-                            const Color(0xc0dedcff),
-                            CustomersIcon(size: size.width * 0.06),
-                            "8.54k",
-                            "Customers"),
-                        size),
-                    SizedBox(height: size.height * 0.025),
-                    row(
-                        CircularWidgetState(
-                            const Color(0xf1eee9ff),
-                            ProductsIcon(
+            padding: EdgeInsets.all(size.width * 0.1),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  row1(size),
+                  SizedBox(height: size.height * 0.075),
+                  row2(size),
+                  SizedBox(height: size.height * 0.075),
+                  row3(size),
+                  SizedBox(height: size.height * 0.025),
+                  row(
+                      CircularWidgetState(
+                          const Color(0xe6dff1ff),
+                          Padding(
+                            padding: EdgeInsets.all(size.width * 0.01),
+                            child: SalesIcon(
                               size: size.width * 0.06,
                             ),
-                            "1.423k",
-                            "Products"),
-                        CircularWidgetState(
-                            const Color(0xf1dfdfff),
-                            RevenueIcon(size: size.width * 0.06),
-                            "\$9745",
-                            "Revenue"),
-                        size),
-                  ],
-                ),
-              )),
+                          ),
+                          "230k",
+                          "Sales"),
+                      CircularWidgetState(
+                          const Color(0xc0dedcff),
+                          CustomersIcon(size: size.width * 0.06),
+                          "8.54k",
+                          "Customers"),
+                      size),
+                  SizedBox(height: size.height * 0.025),
+                  row(
+                      CircularWidgetState(
+                          const Color(0xf1eee9ff),
+                          ProductsIcon(
+                            size: size.width * 0.06,
+                          ),
+                          "1.423k",
+                          "Products"),
+                      CircularWidgetState(
+                          const Color(0xf1dfdfff),
+                          RevenueIcon(size: size.width * 0.06),
+                          "\$9745",
+                          "Revenue"),
+                      size),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -193,19 +194,24 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
   }
 
   Widget row2(Size size) {
+    double fontController = size.width * 0.00275;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             Text(
               'Hello David',
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: fontController * 35, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: size.height * 0.02,
             ),
             Text('Welcome Back !',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: fontController * 15,
                 ))
           ],
         ),
@@ -213,11 +219,11 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
           height: size.width * 0.175,
           width: size.width * 0.175,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: Colors.grey[700]!),
             borderRadius: BorderRadius.circular(20.0),
           ),
           child: Padding(
-            padding: EdgeInsets.all(size.height * 0.0225),
+            padding: EdgeInsets.all(size.width * 0.05),
             child: StatisticsIcon(
               size: size.width * 0.08,
             ),
