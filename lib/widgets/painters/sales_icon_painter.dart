@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -7,9 +6,9 @@ class SalesIconPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
-    paint.color = Colors.grey[600]!;
+    paint.color = Colors.black;
     paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = 2.0;
+    paint.strokeWidth = 2.5;
     // TODO: Set properties to paint
     var y = size.width / (sqrt(2) + 1);
     var x = y / sqrt(2);
@@ -33,6 +32,6 @@ class SalesIconPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     // TODO: implement shouldRepaint
-    return true;
+    return false;
   }
 }

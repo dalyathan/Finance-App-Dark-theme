@@ -14,14 +14,37 @@ class _CircularWidgetState extends State<CircularWidget> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-        color: widget.widgetState.color,
+        height: size.width * 0.35,
+        width: size.width * 0.35,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(size.width * 0.2)),
+          color: widget.widgetState.color,
+          shape: BoxShape.circle,
+        ),
         child: Column(
           children: [
+            const Spacer(
+              flex: 3,
+            ),
             widget.widgetState.icon,
-            Text(widget.widgetState.mainText),
-            Text(widget.widgetState.bottomText)
+            const Spacer(
+              flex: 1,
+            ),
+            Text(
+              widget.widgetState.mainText,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25),
+            ),
+            SizedBox(
+              height: size.height * 0.002,
+            ),
+            Text(widget.widgetState.bottomText,
+                style: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w300)),
+            const Spacer(
+              flex: 3,
+            ),
           ],
         ));
   }
