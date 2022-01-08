@@ -5,7 +5,7 @@ class RevenueIconPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // TODO: implement paint
-    var slicedDistance = 0.25;
+    var slicedDistance = 0.2;
     var paint = Paint();
     paint.color = Colors.black;
     paint.style = PaintingStyle.stroke;

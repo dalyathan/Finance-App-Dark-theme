@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/widgets/painters/sliced_pie_painter.dart';
+import 'package:portfolio/widgets/painters/revenue_icon_painter.dart';
 
 class RevenueIcon extends StatefulWidget {
   final double size;
