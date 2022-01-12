@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/widgets/clippers/rectangular_clipper.dart';
 import 'package:portfolio/widgets/clippers/triangular_clipper.dart';
 import 'package:portfolio/widgets/containers/circular_widget.dart';
+import 'package:portfolio/widgets/icons/folder_icon.dart';
 import 'package:portfolio/widgets/icons/stylish_house_icon.dart';
 import 'package:portfolio/widgets/icons/sales_icon.dart';
 import 'package:portfolio/widgets/icons/customers_icon.dart';
@@ -94,19 +95,15 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                           "Revenue"),
                       size),
                   SizedBox(height: size.height * 0.01),
-                  Container(
-                    width: size.width * 0.15,
-                    height: size.height * 0.1,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      StylishHouseIcon(
+                        width: size.width * 0.15,
+                        height: size.height * 0.1,
                       ),
-                    ),
-                    child: StylishHouseIcon(
-                      width: size.width * 0.15,
-                      height: size.height * 0.1,
-                    ),
+                      FolderIcon(size: size.width * 0.1)
+                    ],
                   ),
                 ],
               ),
