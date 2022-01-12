@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/widgets/painters/four_dots_painter.dart';
 import 'package:portfolio/widgets/painters/house_icon_painter.dart';
 
 class StylishHouseIcon extends StatefulWidget {
@@ -15,10 +16,6 @@ class _StylishHouseIconState extends State<StylishHouseIcon> {
   @override
   Widget build(BuildContext context) {
     Size houseIconSize = Size(widget.width * 0.55, widget.height * 0.4);
-    print("width " +
-        widget.width.toString() +
-        " height " +
-        widget.height.toString());
     return Stack(
       children: [
         Positioned(
@@ -27,6 +24,14 @@ class _StylishHouseIconState extends State<StylishHouseIcon> {
           child: CustomPaint(
             size: houseIconSize,
             painter: HouseIconPainter(),
+          ),
+        ),
+        Positioned(
+          right: widget.width * 0.325,
+          top: widget.height * 0.32,
+          child: CustomPaint(
+            size: Size(widget.width * 0.175, widget.width * 0.175),
+            painter: FourDotsPainter(),
           ),
         )
       ],
