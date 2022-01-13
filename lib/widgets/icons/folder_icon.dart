@@ -12,9 +12,12 @@ class FolderIcon extends StatefulWidget {
 class _FolderIconState extends State<FolderIcon> {
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      size: Size.square(widget.size),
-      painter: FolderIconPainter(),
+    return Padding(
+      padding: EdgeInsets.only(top: widget.size * 0.375),
+      child: CustomPaint(
+        size: Size.square(widget.size),
+        painter: FolderIconPainter(),
+      ),
     );
   }
 }

@@ -7,7 +7,6 @@ class HouseIconPainter extends CustomPainter {
   late Canvas canvas;
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
     curveRadius = 0.15;
     this.size = size;
     this.canvas = canvas;
@@ -84,7 +83,6 @@ class HouseIconPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     return false;
   }
 }

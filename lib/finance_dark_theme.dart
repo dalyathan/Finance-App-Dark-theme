@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/widgets/clippers/rectangular_clipper.dart';
 import 'package:portfolio/widgets/clippers/triangular_clipper.dart';
 import 'package:portfolio/widgets/containers/circular_widget.dart';
+import 'package:portfolio/widgets/icons/bar_chart_icon.dart';
 import 'package:portfolio/widgets/icons/folder_icon.dart';
+import 'package:portfolio/widgets/icons/simpler_person_icon.dart';
 import 'package:portfolio/widgets/icons/stylish_house_icon.dart';
 import 'package:portfolio/widgets/icons/sales_icon.dart';
 import 'package:portfolio/widgets/icons/customers_icon.dart';
@@ -61,7 +63,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                   row2(size),
                   SizedBox(height: size.height * 0.075),
                   row3(size),
-                  SizedBox(height: size.height * 0.025),
+                  SizedBox(height: size.height * 0.015),
                   row(
                       CircularWidgetState(
                           const Color(0xe6dff1ff),
@@ -79,7 +81,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                           "8.54k",
                           "Customers"),
                       size),
-                  SizedBox(height: size.height * 0.025),
+                  SizedBox(height: size.height * 0.02),
                   row(
                       CircularWidgetState(
                           const Color(0xf1eee9ff),
@@ -94,15 +96,22 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                           "\$9745",
                           "Revenue"),
                       size),
-                  SizedBox(height: size.height * 0.01),
+                  SizedBox(height: size.height * 0.02),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       StylishHouseIcon(
                         width: size.width * 0.15,
-                        height: size.height * 0.1,
+                        height: size.height * 0.095,
                       ),
-                      FolderIcon(size: size.width * 0.1)
+                      FolderIcon(size: size.width * 0.09),
+                      BarChartIcon(
+                          width: size.width * 0.09,
+                          height: size.width * 0.09 / 1.3),
+                      SimplerPersonIcon(
+                          width: size.width * 0.09 * 0.66,
+                          height: size.width * 0.09)
                     ],
                   ),
                 ],
