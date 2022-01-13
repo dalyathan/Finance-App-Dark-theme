@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/model/CircularWidgetState.dart';
+import 'package:portfolio/widgets/containers/profile_row.dart';
 import 'package:portfolio/widgets/icons/customers_icon.dart';
 import 'package:portfolio/widgets/icons/products_icon.dart';
 import 'package:portfolio/widgets/icons/revenue_icon.dart';
@@ -29,18 +30,23 @@ class FinanceDetailPage extends StatelessWidget {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(children: [
+              SizedBox(height: size.height * 0.025),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                child: const ProfileRow(),
+              ),
+              SizedBox(height: size.height * 0.05),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
                 child: Column(
                   children: [
-                    SizedBox(height: size.height * 0.1),
                     showGraphHeading(),
-                    SizedBox(height: size.height * 0.05),
+                    SizedBox(height: size.height * 0.025),
                     showGraph()
                   ],
                 ),
               ),
-              SizedBox(height: size.height * 0.025),
+              SizedBox(height: size.height * 0.0125),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
                 child: Container(

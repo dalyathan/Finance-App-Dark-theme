@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/screens/finance_detail_page.dart';
 import 'package:portfolio/widgets/clippers/triangular_clipper.dart';
 import 'package:portfolio/widgets/containers/circular_widget.dart';
+import 'package:portfolio/widgets/containers/profile_row.dart';
 import 'package:portfolio/widgets/icons/bar_chart_icon.dart';
+import 'package:portfolio/widgets/icons/customers_icon.dart';
 import 'package:portfolio/widgets/icons/folder_icon.dart';
 import 'package:portfolio/widgets/icons/search_icon.dart';
 import 'package:portfolio/widgets/icons/simpler_person_icon.dart';
@@ -64,7 +66,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    row1(),
+                    const ProfileRow(),
                     SizedBox(height: size.height * 0.075),
                     row2(),
                     SizedBox(height: size.height * 0.075),
@@ -81,11 +83,27 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                             "1.423k",
                             "Products"),
                         CircularWidgetState(
+                            const Color.fromRGBO(230, 223, 241, 1),
+                            CustomersIcon(size: size.width * 0.06),
+                            "8.54k",
+                            "Customers")),
+                    SizedBox(height: size.height * 0.015),
+                    row(
+                        CircularWidgetState(
+                            const Color.fromRGBO(192, 222, 220, 1),
+                            Padding(
+                              padding: EdgeInsets.all(size.width * 0.01),
+                              child: SalesIcon(
+                                size: size.width * 0.06,
+                              ),
+                            ),
+                            "230k",
+                            "Sales"),
+                        CircularWidgetState(
                             const Color(0xf1dfdfff),
                             RevenueIcon(size: size.width * 0.06),
                             "\$9745",
-                            "Revenue"),
-                        size),
+                            "Revenue")),
                   ],
                 ),
               ),
@@ -119,8 +137,8 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
     );
   }
 
-  Widget row(CircularWidgetState leftChildState,
-      CircularWidgetState rightChildState, Size size) {
+  Widget row(
+      CircularWidgetState leftChildState, CircularWidgetState rightChildState) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -177,36 +195,6 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
         ),
         // )
       ]),
-    );
-  }
-
-  Widget row1() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Transform(
-            alignment: FractionalOffset.center,
-            transform: Matrix4.identity()..rotateZ(-90 * 3.1415927 / 180),
-            child: ClipPath(
-                clipper: CustomTriangleClipper(),
-                child: Icon(
-                  Icons.menu,
-                  size: size.height * 0.045,
-                ))),
-        Container(
-            height: size.height * 0.065,
-            width: size.width * 0.15,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(18.0),
-                child: Padding(
-                  padding: EdgeInsets.all(size.height * 0.001),
-                  child: Image.asset('assets/images/me.jpg'),
-                )))
-      ],
     );
   }
 
