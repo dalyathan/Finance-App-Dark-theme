@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'finance_dark_theme.dart';
+import 'screens/finance_dark_theme.dart';
 
 void main() {
   runApp(const MyApp());

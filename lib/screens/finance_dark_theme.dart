@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/widgets/clippers/rectangular_clipper.dart';
 import 'package:portfolio/widgets/clippers/triangular_clipper.dart';
 import 'package:portfolio/widgets/containers/circular_widget.dart';
+import 'package:portfolio/widgets/icons/bar_chart_icon.dart';
+import 'package:portfolio/widgets/icons/folder_icon.dart';
+import 'package:portfolio/widgets/icons/search_icon.dart';
+import 'package:portfolio/widgets/icons/simpler_person_icon.dart';
 import 'package:portfolio/widgets/icons/stylish_house_icon.dart';
 import 'package:portfolio/widgets/icons/sales_icon.dart';
 import 'package:portfolio/widgets/icons/customers_icon.dart';
@@ -9,7 +13,7 @@ import 'package:portfolio/widgets/icons/revenue_icon.dart';
 import 'package:portfolio/widgets/icons/products_icon.dart';
 import 'package:portfolio/widgets/icons/statistics_icon.dart';
 
-import 'model/CircularWidgetState.dart';
+import '../model/CircularWidgetState.dart';
 
 //https://dribbble.com/shots/17195869-Finance-Dark-theme-Design/attachments/12296436?mode=media
 class FinanceDarkTheme extends StatefulWidget {
@@ -21,7 +25,7 @@ class FinanceDarkTheme extends StatefulWidget {
 
 class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
   final _fieldController = TextEditingController();
-
+  int _selectedIndex = 0;
   late FocusNode myFocusNode;
 
   final ThemeData specialThemeData = ThemeData(
@@ -42,85 +46,100 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
     myFocusNode = FocusNode();
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Theme(
       data: specialThemeData,
       child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-                size.width * 0.1, size.width * 0.1, size.width * 0.1, 0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  row1(size),
-                  SizedBox(height: size.height * 0.075),
-                  row2(size),
-                  SizedBox(height: size.height * 0.075),
-                  row3(size),
-                  SizedBox(height: size.height * 0.025),
-                  row(
-                      CircularWidgetState(
-                          const Color(0xe6dff1ff),
-                          Padding(
-                            padding: EdgeInsets.all(size.width * 0.01),
-                            child: SalesIcon(
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                  size.width * 0.1, size.width * 0.1, size.width * 0.1, 0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    row1(size),
+                    SizedBox(height: size.height * 0.075),
+                    row2(size),
+                    SizedBox(height: size.height * 0.075),
+                    row3(size),
+                    SizedBox(height: size.height * 0.015),
+                    row(
+                        CircularWidgetState(
+                            const Color(0xe6dff1ff),
+                            Padding(
+                              padding: EdgeInsets.all(size.width * 0.01),
+                              child: SalesIcon(
+                                size: size.width * 0.06,
+                              ),
+                            ),
+                            "230k",
+                            "Sales"),
+                        CircularWidgetState(
+                            const Color(0xc0dedcff),
+                            CustomersIcon(size: size.width * 0.06),
+                            "8.54k",
+                            "Customers"),
+                        size),
+                    SizedBox(height: size.height * 0.02),
+                    row(
+                        CircularWidgetState(
+                            const Color(0xf1eee9ff),
+                            ProductsIcon(
                               size: size.width * 0.06,
                             ),
-                          ),
-                          "230k",
-                          "Sales"),
-                      CircularWidgetState(
-                          const Color(0xc0dedcff),
-                          CustomersIcon(size: size.width * 0.06),
-                          "8.54k",
-                          "Customers"),
-                      size),
-                  SizedBox(height: size.height * 0.025),
-                  row(
-                      CircularWidgetState(
-                          const Color(0xf1eee9ff),
-                          ProductsIcon(
-                            size: size.width * 0.06,
-                          ),
-                          "1.423k",
-                          "Products"),
-                      CircularWidgetState(
-                          const Color(0xf1dfdfff),
-                          RevenueIcon(size: size.width * 0.06),
-                          "\$9745",
-                          "Revenue"),
-                      size),
-                  SizedBox(height: size.height * 0.01),
-                  Container(
-                    width: size.width * 0.15,
-                    height: size.height * 0.1,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                    ),
-                    child: StylishHouseIcon(
-                      width: size.width * 0.15,
-                      height: size.height * 0.1,
-                    ),
-                  ),
-                ],
+                            "1.423k",
+                            "Products"),
+                        CircularWidgetState(
+                            const Color(0xf1dfdfff),
+                            RevenueIcon(size: size.width * 0.06),
+                            "\$9745",
+                            "Revenue"),
+                        size),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+          bottomNavigationBar: BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                  icon: StylishHouseIcon(
+                    width: size.width * 0.15,
+                    height: size.height * 0.095,
+                  ),
+                  title: Container(height: 0.0)),
+              BottomNavigationBarItem(
+                  icon: FolderIcon(size: size.width * 0.09),
+                  title: Container(height: 0.0)),
+              BottomNavigationBarItem(
+                  icon: BarChartIcon(
+                      width: size.width * 0.09,
+                      height: size.width * 0.09 / 1.3),
+                  title: Container(height: 0.0)),
+              BottomNavigationBarItem(
+                  icon: SimplerPersonIcon(
+                      width: size.width * 0.09 * 0.66,
+                      height: size.width * 0.09),
+                  title: Container(height: 0.0)),
+            ],
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+          )),
     );
   }
 
   Widget row(CircularWidgetState leftChildState,
       CircularWidgetState rightChildState, Size size) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CircularWidget(leftChildState),
         SizedBox(width: size.width * 0.05),
@@ -148,8 +167,8 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
           visible:
               myFocusNode.hasFocus == false && _fieldController.text.isEmpty,
           child: Positioned(
-            top: size.height * 0.005,
-            left: size.width * 0.225,
+            top: size.height * 0.02,
+            left: size.width * 0.25,
             child: GestureDetector(
                 onTapDown: (details) => setState(() {
                       myFocusNode.requestFocus();
@@ -157,16 +176,11 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ClipPath(
-                      clipper: CustomRectangularClipper(),
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.grey[600],
-                        size: size.height * 0.065,
-                      ),
+                    SearchIcon(
+                      size: size.height * 0.05,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: EdgeInsets.only(bottom: size.height * 0.025),
                       child: Text(
                         'Search',
                         style: TextStyle(
@@ -203,9 +217,12 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10.0),
             ),
-            child: Padding(
-                padding: EdgeInsets.all(size.height * 0.001),
-                child: Icon(Icons.person, size: size.width * 0.14)))
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(18.0),
+                child: Padding(
+                  padding: EdgeInsets.all(size.height * 0.001),
+                  child: Image.asset('assets/images/me.jpg'),
+                )))
       ],
     );
   }

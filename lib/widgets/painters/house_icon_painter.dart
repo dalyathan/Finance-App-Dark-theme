@@ -7,20 +7,19 @@ class HouseIconPainter extends CustomPainter {
   late Canvas canvas;
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
-    curveRadius = 0.1;
+    curveRadius = 0.15;
     this.size = size;
     this.canvas = canvas;
     brush = Paint();
 
     brush.color = Colors.white;
-    brush.strokeWidth = 2.5;
+    brush.strokeWidth = 3;
     brush.style = PaintingStyle.stroke;
     brush.strokeCap = StrokeCap.round;
 
-    double rectRatio = 0.6;
-    double chimneyHeight = 0.1;
-    double chimneyWidth = 0.1;
+    double rectRatio = 0.575;
+    double chimneyHeight = 0.05;
+    double chimneyWidth = 0.15;
 
     List<double> A = [size.width * 0.5, 0];
     List<double> B = [
@@ -60,9 +59,6 @@ class HouseIconPainter extends CustomPainter {
       P[1] + size.width * chimneyWidth * gojoSlope
     ];
 
-    assert(size.height * chimneyHeight > size.width * curveRadius);
-    assert(N[1] - P[1] > O[1] - P[1]);
-
     canvas.drawLine(Offset(B[0], B[1]), Offset(C[0], C[1]), brush);
     makeCurveBetweeenIntersections(C, D, E);
     canvas.drawLine(Offset(E[0], E[1]), Offset(F[0], F[1]), brush);
@@ -87,7 +83,6 @@ class HouseIconPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     return false;
   }
 }
