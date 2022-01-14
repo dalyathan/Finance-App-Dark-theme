@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/finance_detail_page.dart';
 import 'package:portfolio/widgets/clippers/rectangular_clipper.dart';
 import 'package:portfolio/widgets/clippers/triangular_clipper.dart';
 import 'package:portfolio/widgets/containers/circular_widget.dart';
@@ -24,7 +25,7 @@ class FinanceDarkTheme extends StatefulWidget {
 
 class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
   final _fieldController = TextEditingController();
-
+  late Size size;
   late FocusNode myFocusNode;
 
   final ThemeData specialThemeData = ThemeData(
@@ -47,7 +48,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    size = MediaQuery.of(context).size;
     return Theme(
       data: specialThemeData,
       child: Scaffold(
@@ -58,11 +59,11 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  row1(size),
+                  row1(),
                   SizedBox(height: size.height * 0.075),
-                  row2(size),
+                  row2(),
                   SizedBox(height: size.height * 0.075),
-                  row3(size),
+                  row3(),
                   SizedBox(height: size.height * 0.015),
                   row(
                       CircularWidgetState(
@@ -135,7 +136,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
     );
   }
 
-  Widget row3(Size size) {
+  Widget row3() {
     return SizedBox(
       height: size.height * 0.125,
       child: Stack(children: [
@@ -189,7 +190,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
     );
   }
 
-  Widget row1(Size size) {
+  Widget row1() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -216,7 +217,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
     );
   }
 
-  Widget row2(Size size) {
+  Widget row2() {
     double fontController = size.width * 0.00275;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,8 +248,14 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
           ),
           child: Padding(
             padding: EdgeInsets.all(size.width * 0.05),
-            child: StatisticsIcon(
-              size: size.width * 0.08,
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_context) => FinanceDetailPage())),
+              child: StatisticsIcon(
+                size: size.width * 0.08,
+              ),
             ),
           ),
         )
