@@ -71,6 +71,7 @@ class HouseIconPainter extends CustomPainter {
     canvas.drawLine(Offset(P[0], P[1]), Offset(Q[0], Q[1]), brush);
     canvas.drawLine(Offset(R[0], R[1]), Offset(P[0], P[1]), brush);
     makeCurveBetweeenIntersections(B, A, R);
+    paintTheDots();
   }
 
   makeCurveBetweeenIntersections(
@@ -79,6 +80,33 @@ class HouseIconPainter extends CustomPainter {
     curvedCorner.moveTo(from[0], from[1]);
     curvedCorner.quadraticBezierTo(control[0], control[1], to[0], to[1]);
     canvas.drawPath(curvedCorner, brush);
+  }
+
+  paintTheDots() {
+    var gapBetweenCircles = 0.09;
+    var radius = 0.08;
+    var horizontalOffset = 0.425;
+    var verticalOffset = 0.525;
+    brush.style = PaintingStyle.fill;
+    canvas.drawCircle(
+        Offset(size.width * horizontalOffset, size.height * verticalOffset),
+        size.width * radius,
+        brush);
+    canvas.drawCircle(
+        Offset(size.width * (horizontalOffset + radius + gapBetweenCircles),
+            size.height * verticalOffset),
+        size.width * radius,
+        brush);
+    canvas.drawCircle(
+        Offset(size.width * horizontalOffset,
+            size.height * (verticalOffset + radius + gapBetweenCircles)),
+        size.width * radius,
+        brush);
+    canvas.drawCircle(
+        Offset(size.width * (horizontalOffset + radius + gapBetweenCircles),
+            size.height * (verticalOffset + radius + gapBetweenCircles)),
+        size.width * radius,
+        brush);
   }
 
   @override
