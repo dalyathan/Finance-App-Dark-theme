@@ -11,7 +11,7 @@ class ZigZagPainter extends CustomPainter {
     brush.strokeJoin = StrokeJoin.miter;
     brush.strokeMiterLimit = 6;
 
-    Offset topEnd = Offset(size.width * 0.75, 0);
+    Offset topEnd = Offset(size.width * 0.65, 0);
     Offset bottomEnd = Offset(size.width * 0.2, size.height);
     Offset leftJoint = Offset(0, size.height * 0.625);
     Offset rightJoint = Offset(size.width, size.height * 0.25);
@@ -23,7 +23,6 @@ class ZigZagPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     return false;
   }
 }

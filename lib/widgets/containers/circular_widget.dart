@@ -13,9 +13,10 @@ class _CircularWidgetState extends State<CircularWidget> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    double radius = size.width * 0.35;
     return Container(
-        height: size.width * 0.35,
-        width: size.width * 0.35,
+        height: radius,
+        width: radius,
         decoration: BoxDecoration(
           color: widget.widgetState.color,
           shape: BoxShape.circle,
@@ -31,17 +32,19 @@ class _CircularWidgetState extends State<CircularWidget> {
             ),
             Text(
               widget.widgetState.mainText,
-              style: const TextStyle(
+              style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 25),
+                  fontSize: radius * 0.006 * 25),
             ),
             SizedBox(
-              height: size.height * 0.002,
+              height: radius * 0.005,
             ),
             Text(widget.widgetState.bottomText,
-                style: const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.w300)),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
+                    fontSize: radius * 0.005 * 20)),
             const Spacer(
               flex: 3,
             ),

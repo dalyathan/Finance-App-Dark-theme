@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/finance_detail_page.dart';
-import 'package:portfolio/widgets/clippers/triangular_clipper.dart';
 import 'package:portfolio/widgets/containers/circular_widget.dart';
 import 'package:portfolio/widgets/containers/profile_row.dart';
 import 'package:portfolio/widgets/icons/bar_chart_icon.dart';
@@ -68,10 +67,10 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                   children: [
                     const ProfileRow(),
                     SizedBox(height: size.height * 0.075),
-                    row2(),
+                    greetings(),
                     SizedBox(height: size.height * 0.075),
-                    row3(),
-                    SizedBox(height: size.height * 0.015),
+                    searchBar(),
+                    SizedBox(height: size.height * 0.05),
                     row(
                         CircularWidgetState(
                             const Color(0xe6dff1ff),
@@ -109,31 +108,32 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
               ),
             ),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  icon: StylishHouseIcon(
-                    width: size.width * 0.15,
-                    height: size.height * 0.095,
-                  ),
-                  title: Container(height: 0.0)),
-              BottomNavigationBarItem(
-                  icon: FolderIcon(size: size.width * 0.09),
-                  title: Container(height: 0.0)),
-              BottomNavigationBarItem(
-                  icon: BarChartIcon(
-                      width: size.width * 0.09,
-                      height: size.width * 0.09 / 1.3),
-                  title: Container(height: 0.0)),
-              BottomNavigationBarItem(
-                  icon: SimplerPersonIcon(
-                      width: size.width * 0.09 * 0.66,
-                      height: size.width * 0.09),
-                  title: Container(height: 0.0)),
-            ],
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-          )),
+          bottomNavigationBar: bottomNavbar()),
+    );
+  }
+
+  BottomNavigationBar bottomNavbar() {
+    return BottomNavigationBar(
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+            icon: StylishHouseIcon(
+              width: size.width * 0.125,
+            ),
+            title: Container(height: 0.0)),
+        BottomNavigationBarItem(
+            icon: FolderIcon(size: size.width * 0.09),
+            title: Container(height: 0.0)),
+        BottomNavigationBarItem(
+            icon: BarChartIcon(
+                width: size.width * 0.09, height: size.width * 0.09 / 1.3),
+            title: Container(height: 0.0)),
+        BottomNavigationBarItem(
+            icon: SimplerPersonIcon(
+                width: size.width * 0.09 * 0.66, height: size.width * 0.09),
+            title: Container(height: 0.0)),
+      ],
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
     );
   }
 
@@ -149,9 +149,12 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
     );
   }
 
-  Widget row3() {
+  Widget searchBar() {
+    double height = size.height * 0.125 < 50 ? size.height * 0.125 : 50;
+    double width = size.width * 0.8;
     return SizedBox(
-      height: size.height * 0.125,
+      height: height,
+      width: width,
       child: Stack(children: [
         TextField(
           focusNode: myFocusNode,
@@ -159,7 +162,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(size.height * 0.05),
+                Radius.circular(height * 0.5),
               ),
             ),
           ),
@@ -168,8 +171,8 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
           visible:
               myFocusNode.hasFocus == false && _fieldController.text.isEmpty,
           child: Positioned(
-            top: size.height * 0.02,
-            left: size.width * 0.25,
+            top: height * 0.275,
+            left: width * 0.325,
             child: GestureDetector(
                 onTapDown: (details) => setState(() {
                       myFocusNode.requestFocus();
@@ -178,10 +181,10 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SearchIcon(
-                      size: size.height * 0.05,
+                      size: height * 0.65,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(bottom: size.height * 0.025),
+                      padding: EdgeInsets.only(bottom: height * 0.27),
                       child: Text(
                         'Search',
                         style: TextStyle(
@@ -193,12 +196,12 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                 )),
           ),
         ),
-        // )
       ]),
+      //),
     );
   }
 
-  Widget row2() {
+  Widget greetings() {
     double fontController = size.width * 0.00275;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -220,20 +223,18 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                 ))
           ],
         ),
-        Container(
-          height: size.width * 0.175,
-          width: size.width * 0.175,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[700]!),
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(size.width * 0.05),
-            child: GestureDetector(
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_context) => FinanceDetailPage())),
+        GestureDetector(
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (_context) => FinanceDetailPage())),
+          child: Container(
+            height: size.width * 0.175,
+            width: size.width * 0.175,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey[700]!),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(size.width * 0.05),
               child: StatisticsIcon(
                 size: size.width * 0.08,
               ),

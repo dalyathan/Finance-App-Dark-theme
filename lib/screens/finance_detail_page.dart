@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/model/CircularWidgetState.dart';
+import 'package:portfolio/widgets/containers/line_graph.dart';
 import 'package:portfolio/widgets/containers/profile_row.dart';
 import 'package:portfolio/widgets/icons/customers_icon.dart';
 import 'package:portfolio/widgets/icons/products_icon.dart';
 import 'package:portfolio/widgets/icons/revenue_icon.dart';
-import 'package:portfolio/widgets/images/line_graph_image.dart';
 
 import '../widgets/icons/sales_icon.dart';
 
@@ -42,11 +42,11 @@ class FinanceDetailPage extends StatelessWidget {
                   children: [
                     showGraphHeading(),
                     SizedBox(height: size.height * 0.025),
-                    showGraph()
+                    const LineGraph()
                   ],
                 ),
               ),
-              SizedBox(height: size.height * 0.0125),
+              SizedBox(height: size.height * 0.05),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
                 child: Container(
@@ -123,11 +123,12 @@ class FinanceDetailPage extends StatelessWidget {
   }
 
   Row salesRevenueBar(CircularWidgetState data) {
+    double height = size.width * 0.15;
     return Row(
       children: [
         Container(
-            height: size.width * 0.15,
-            width: size.width * 0.15,
+            height: height,
+            width: height,
             decoration: BoxDecoration(
               color: data.color,
               shape: BoxShape.circle,
@@ -140,20 +141,17 @@ class FinanceDetailPage extends StatelessWidget {
             Text(
               data.bottomText,
               style: TextStyle(
-                  fontSize: size.width * 0.0035 * 15,
-                  fontWeight: FontWeight.bold),
+                  fontSize: height * 0.02 * 15, fontWeight: FontWeight.bold),
             ),
             Text("Since last week",
                 style: TextStyle(
-                    fontSize: size.width * 0.0035 * 12.5,
-                    color: Colors.grey[700]!))
+                    fontSize: height * 0.02 * 12.5, color: Colors.grey[700]!))
           ],
         ),
         const Spacer(flex: 2),
         Text(data.mainText,
             style: TextStyle(
-                fontSize: size.width * 0.0035 * 20,
-                fontWeight: FontWeight.bold))
+                fontSize: height * 0.02 * 20, fontWeight: FontWeight.bold))
       ],
     );
   }
@@ -164,51 +162,6 @@ class FinanceDetailPage extends StatelessWidget {
       description("\$ 80.3M", "Market Cap"),
       description("\$ 1.73M", "Volume"),
     ]);
-  }
-
-  Stack showGraph() {
-    return Stack(children: [
-      LineGraphImage(width: size.width * 0.8),
-      Positioned(
-        top: size.height * 0.175,
-        child: Container(
-          width: size.width * 0.8,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              period("1D"),
-              selectedPeriod("1W"),
-              period("1M"),
-              period("3M"),
-              period("6M"),
-              period("9M"),
-              period("1Y"),
-            ],
-          ),
-        ),
-      )
-    ]);
-  }
-
-  Container selectedPeriod(String text) {
-    return Container(
-      width: size.width * 0.15,
-      height: size.height * 0.05,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(size.width * 0.035),
-        color: const Color.fromRGBO(192, 222, 220, 1),
-      ),
-      child: Center(
-          child: Text(text,
-              style: TextStyle(
-                  fontSize: size.width * 0.0035 * 12.5, color: Colors.black))),
-    );
-  }
-
-  Text period(String text) {
-    return Text(text,
-        style: TextStyle(
-            fontSize: size.width * 0.0035 * 12.5, color: Colors.grey[700]!));
   }
 
   Widget description(String amount, String type) {

@@ -21,70 +21,59 @@ class HouseIconPainter extends CustomPainter {
     double chimneyHeight = 0.05;
     double chimneyWidth = 0.15;
 
-    List<double> A = [size.width * 0.5, 0];
-    List<double> B = [
-      size.width * (0.5 - curveRadius),
-      size.width * curveRadius
-    ];
-    List<double> C = [
-      curveRadius * size.width,
-      size.height * (1 - rectRatio) - size.width * curveRadius
-    ];
-    List<double> D = [0, size.height * (1 - rectRatio)];
+    Offset A = Offset(size.width * 0.5, 0);
+    Offset B =
+        Offset(size.width * (0.5 - curveRadius), size.width * curveRadius);
+    Offset C = Offset(curveRadius * size.width,
+        size.height * (1 - rectRatio) - size.width * curveRadius);
+    Offset D = Offset(0, size.height * (1 - rectRatio));
 
-    List<double> E = [
-      0,
-      size.height * (1 - rectRatio) + size.width * curveRadius
-    ];
-    List<double> F = [0, size.height - size.width * curveRadius];
-    List<double> G = [0, size.height];
-    List<double> H = [size.width * curveRadius, size.height];
+    Offset E =
+        Offset(0, size.height * (1 - rectRatio) + size.width * curveRadius);
+    Offset F = Offset(0, size.height - size.width * curveRadius);
+    Offset G = Offset(0, size.height);
+    Offset H = Offset(size.width * curveRadius, size.height);
 
-    List<double> I = [size.width * (1 - curveRadius), H[1]];
-    List<double> J = [size.width, G[1]];
-    List<double> K = [size.width, F[1]];
-    List<double> L = [size.width, E[1]];
+    Offset I = Offset(size.width * (1 - curveRadius), H.dy);
+    Offset J = Offset(size.width, G.dy);
+    Offset K = Offset(size.width, F.dy);
+    Offset L = Offset(size.width, E.dy);
 
-    List<double> R = [size.width * (0.5 + curveRadius), B[1]];
-    List<double> M = [size.width, D[1]];
-    List<double> N = [size.width * (1 - curveRadius), C[1]];
-    double gojoSlope = (R[1] - N[1]) / (R[0] - N[0]);
-    List<double> P = [
-      R[0] + size.height * chimneyHeight / gojoSlope,
-      size.height * chimneyHeight + R[1]
-    ];
-    List<double> Q = [P[0], size.height * 0.065];
-    List<double> O = [
-      P[0] + size.width * chimneyWidth,
-      P[1] + size.width * chimneyWidth * gojoSlope
-    ];
+    Offset R = Offset(size.width * (0.5 + curveRadius), B.dy);
+    Offset M = Offset(size.width, D.dy);
+    Offset N = Offset(size.width * (1 - curveRadius), C.dy);
+    double gojoSlope = (R.dy - N.dy) / (R.dx - N.dx);
+    Offset P = Offset(R.dx + size.height * chimneyHeight / gojoSlope,
+        size.height * chimneyHeight + R.dy);
+    Offset Q = Offset(P.dx, size.height * 0.065);
+    Offset O = Offset(P.dx + size.width * chimneyWidth,
+        P.dy + size.width * chimneyWidth * gojoSlope);
 
-    canvas.drawLine(Offset(B[0], B[1]), Offset(C[0], C[1]), brush);
+    canvas.drawLine(B, C, brush);
     makeCurveBetweeenIntersections(C, D, E);
-    canvas.drawLine(Offset(E[0], E[1]), Offset(F[0], F[1]), brush);
+    canvas.drawLine(E, F, brush);
     makeCurveBetweeenIntersections(F, G, H);
-    canvas.drawLine(Offset(H[0], H[1]), Offset(I[0], I[1]), brush);
+    canvas.drawLine(H, I, brush);
     makeCurveBetweeenIntersections(I, J, K);
-    canvas.drawLine(Offset(K[0], K[1]), Offset(L[0], L[1]), brush);
+    canvas.drawLine(K, L, brush);
     makeCurveBetweeenIntersections(L, M, N);
-    canvas.drawLine(Offset(N[0], N[1]), Offset(O[0], O[1]), brush);
-    canvas.drawLine(Offset(P[0], P[1]), Offset(Q[0], Q[1]), brush);
-    canvas.drawLine(Offset(R[0], R[1]), Offset(P[0], P[1]), brush);
+    canvas.drawLine(N, O, brush);
+    canvas.drawLine(P, Q, brush);
+    canvas.drawLine(R, P, brush);
     makeCurveBetweeenIntersections(B, A, R);
     paintTheDots();
   }
 
-  makeCurveBetweeenIntersections(
-      List<double> from, List<double> control, List<double> to) {
+  makeCurveBetweeenIntersections(Offset from, Offset control, Offset to) {
     Path curvedCorner = Path();
-    curvedCorner.moveTo(from[0], from[1]);
-    curvedCorner.quadraticBezierTo(control[0], control[1], to[0], to[1]);
+    curvedCorner.moveTo(from.dx, from.dy);
+    curvedCorner.quadraticBezierTo(control.dx, control.dy, to.dx, to.dy);
     canvas.drawPath(curvedCorner, brush);
   }
 
   paintTheDots() {
-    var gapBetweenCircles = 0.09;
-    var radius = 0.08;
+    var gapBetweenCircles = 0.1;
+    var radius = 0.05;
     var horizontalOffset = 0.425;
     var verticalOffset = 0.525;
     brush.style = PaintingStyle.fill;
