@@ -16,7 +16,7 @@ import '../model/CircularWidgetState.dart';
 
 //https://dribbble.com/shots/17195869-Finance-Dark-theme-Design/attachments/12296436?mode=media
 class FinanceDarkTheme extends StatefulWidget {
-  FinanceDarkTheme({Key? key}) : super(key: key);
+  const FinanceDarkTheme({Key? key}) : super(key: key);
 
   @override
   State<FinanceDarkTheme> createState() => _FinanceDarkThemeState();
@@ -150,7 +150,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
   }
 
   Widget searchBar() {
-    double height = size.height * 0.125 < 50 ? size.height * 0.125 : 50;
+    double height = size.height * 0.125 < 57.5 ? size.height * 0.125 : 57.5;
     double width = size.width * 0.8;
     return SizedBox(
       height: height,
@@ -197,7 +197,6 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
           ),
         ),
       ]),
-      //),
     );
   }
 
@@ -210,7 +209,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hello David',
+              'Hello Surafel',
               style: TextStyle(
                   fontSize: fontController * 35, fontWeight: FontWeight.bold),
             ),

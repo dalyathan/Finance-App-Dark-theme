@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:portfolio/model/data.dart';
+import 'package:portfolio/model/dummy_data.dart';
 import 'package:portfolio/widgets/images/line_graph_image.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class LineGraph extends StatefulWidget {
-  const LineGraph({Key? key}) : super(key: key);
+  final Function(int) updateData;
+  const LineGraph({Key? key, required this.updateData}) : super(key: key);
 
   @override
   _LineGraphState createState() => _LineGraphState();
@@ -34,9 +36,9 @@ class _LineGraphState extends State<LineGraph> {
               key: Key('my-key$index'),
               onVisibilityChanged: (visibilityInfo) {
                 if (visibilityInfo.visibleFraction >= 0.5) {
-                  print('responding to visibilty change from $index');
                   setState(() {
                     offset = offsets[index];
+                    widget.updateData(index);
                   });
                 }
               },
@@ -54,6 +56,7 @@ class _LineGraphState extends State<LineGraph> {
           top: height * 0.535,
           curve: Curves.easeInOutCubic,
           onEnd: () => setState(() {
+                widget.updateData(offsets.indexOf(offset));
                 nowOffset = offset;
               }),
           child: selectedPeriod()),
@@ -103,7 +106,7 @@ class _LineGraphState extends State<LineGraph> {
             duration: const Duration(milliseconds: 350),
             curve: Curves.easeInOutCubic);
       },
-      child: Container(
+      child: SizedBox(
         width: size.width * 0.095,
         height: size.height * 0.05,
         child: Center(

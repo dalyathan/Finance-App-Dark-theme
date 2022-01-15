@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/model/CircularWidgetState.dart';
+import 'package:portfolio/model/data.dart';
+import 'package:portfolio/model/dummy_data.dart';
 import 'package:portfolio/widgets/containers/line_graph.dart';
 import 'package:portfolio/widgets/containers/profile_row.dart';
 import 'package:portfolio/widgets/icons/customers_icon.dart';
@@ -8,9 +10,16 @@ import 'package:portfolio/widgets/icons/revenue_icon.dart';
 
 import '../widgets/icons/sales_icon.dart';
 
-class FinanceDetailPage extends StatelessWidget {
+class FinanceDetailPage extends StatefulWidget {
   FinanceDetailPage({Key? key}) : super(key: key);
+
+  @override
+  State<FinanceDetailPage> createState() => _FinanceDetailPageState();
+}
+
+class _FinanceDetailPageState extends State<FinanceDetailPage> {
   late Size size;
+  late Data currentData;
   final ThemeData specialThemeData = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Colors.yellow[700],
@@ -21,6 +30,14 @@ class FinanceDetailPage extends StatelessWidget {
       bodyText2: TextStyle(fontSize: 18.0),
     ),
   );
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    currentData = DummyData.getData(0);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -42,7 +59,11 @@ class FinanceDetailPage extends StatelessWidget {
                   children: [
                     showGraphHeading(),
                     SizedBox(height: size.height * 0.025),
-                    const LineGraph()
+                    LineGraph(
+                      updateData: (index) => setState(() {
+                        currentData = DummyData.getData(index);
+                      }),
+                    )
                   ],
                 ),
               ),
@@ -65,43 +86,43 @@ class FinanceDetailPage extends StatelessWidget {
                           salesRevenueTitle(),
                           SizedBox(height: size.height * 0.025),
                           salesRevenueBar(
-                            CircularWidgetState(
-                                const Color.fromRGBO(192, 222, 220, 1),
-                                Padding(
-                                  padding: EdgeInsets.all(size.width * 0.01),
-                                  child: SalesIcon(
+                              CircularWidgetState(
+                                  const Color.fromRGBO(192, 222, 220, 1),
+                                  Padding(
+                                    padding: EdgeInsets.all(size.width * 0.01),
+                                    child: SalesIcon(
+                                      size: size.width * 0.06,
+                                    ),
+                                  ),
+                                  currentData.sales,
+                                  "Sales"),
+                              currentData.description),
+                          SizedBox(height: size.height * 0.025),
+                          salesRevenueBar(
+                              CircularWidgetState(
+                                  const Color.fromRGBO(230, 223, 241, 1),
+                                  CustomersIcon(size: size.width * 0.06),
+                                  currentData.customers,
+                                  "Customers"),
+                              currentData.description),
+                          SizedBox(height: size.height * 0.025),
+                          salesRevenueBar(
+                              CircularWidgetState(
+                                  const Color.fromRGBO(241, 238, 233, 1),
+                                  ProductsIcon(
                                     size: size.width * 0.06,
                                   ),
-                                ),
-                                "230k",
-                                "Sales"),
-                          ),
+                                  currentData.products,
+                                  "Products"),
+                              currentData.description),
                           SizedBox(height: size.height * 0.025),
                           salesRevenueBar(
-                            CircularWidgetState(
-                                const Color.fromRGBO(230, 223, 241, 1),
-                                CustomersIcon(size: size.width * 0.06),
-                                "8.54k",
-                                "Customers"),
-                          ),
-                          SizedBox(height: size.height * 0.025),
-                          salesRevenueBar(
-                            CircularWidgetState(
-                                const Color.fromRGBO(241, 238, 233, 1),
-                                ProductsIcon(
-                                  size: size.width * 0.06,
-                                ),
-                                "1.423k",
-                                "Products"),
-                          ),
-                          SizedBox(height: size.height * 0.025),
-                          salesRevenueBar(
-                            CircularWidgetState(
-                                const Color.fromRGBO(241, 223, 223, 1),
-                                RevenueIcon(size: size.width * 0.06),
-                                "\$9745",
-                                "Revenue"),
-                          ),
+                              CircularWidgetState(
+                                  const Color.fromRGBO(241, 223, 223, 1),
+                                  RevenueIcon(size: size.width * 0.06),
+                                  currentData.revenue,
+                                  "Revenue"),
+                              currentData.description),
                           SizedBox(height: size.height * 0.025),
                         ],
                       ),
@@ -122,36 +143,53 @@ class FinanceDetailPage extends StatelessWidget {
     );
   }
 
-  Row salesRevenueBar(CircularWidgetState data) {
-    double height = size.width * 0.15;
+  Row salesRevenueBar(CircularWidgetState data, String description) {
+    double totalWidthRatio = 1 - 2 * (0.065 + 0.05);
+    double iconRatio = 0.15;
+    double smallMargin = 0.025;
+    double descriptionRatio = 0.375;
     return Row(
       children: [
         Container(
-            height: height,
-            width: height,
+            height: size.width * iconRatio,
+            width: size.width * iconRatio,
             decoration: BoxDecoration(
               color: data.color,
               shape: BoxShape.circle,
             ),
             child: Center(child: data.icon)),
-        const Spacer(flex: 1),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              data.bottomText,
-              style: TextStyle(
-                  fontSize: height * 0.02 * 15, fontWeight: FontWeight.bold),
-            ),
-            Text("Since last week",
+        SizedBox(width: size.width * smallMargin),
+        SizedBox(
+          width: size.width * descriptionRatio,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                data.bottomText,
                 style: TextStyle(
-                    fontSize: height * 0.02 * 12.5, color: Colors.grey[700]!))
-          ],
+                    fontSize: size.width * iconRatio * 0.02 * 15,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(description,
+                  style: TextStyle(
+                      fontSize: size.width * iconRatio * 0.02 * 12.5,
+                      color: Colors.grey[700]!))
+            ],
+          ),
         ),
-        const Spacer(flex: 2),
-        Text(data.mainText,
-            style: TextStyle(
-                fontSize: height * 0.02 * 20, fontWeight: FontWeight.bold))
+        SizedBox(width: size.width * 1.5 * smallMargin),
+        SizedBox(
+          width: size.width *
+              (totalWidthRatio -
+                  (iconRatio + 2.5 * smallMargin + descriptionRatio)),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(data.mainText,
+                style: TextStyle(
+                    fontSize: size.width * iconRatio * 0.02 * 20,
+                    fontWeight: FontWeight.bold)),
+          ),
+        )
       ],
     );
   }
