@@ -13,6 +13,7 @@ import 'package:portfolio/widgets/icons/revenue_icon.dart';
 import 'package:portfolio/widgets/icons/statistics_icon.dart';
 
 import '../model/CircularWidgetState.dart';
+import '../widgets/icons/products_icon.dart';
 
 //https://dribbble.com/shots/17195869-Finance-Dark-theme-Design/attachments/12296436?mode=media
 class FinanceDarkTheme extends StatefulWidget {
@@ -92,7 +93,7 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
                             const Color.fromRGBO(192, 222, 220, 1),
                             Padding(
                               padding: EdgeInsets.all(size.width * 0.01),
-                              child: SalesIcon(
+                              child: ProductsIcon(
                                 size: size.width * 0.06,
                               ),
                             ),
