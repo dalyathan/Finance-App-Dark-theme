@@ -92,9 +92,9 @@ class _LineGraphState extends State<LineGraph> {
     );
   }
 
-  GestureDetector period(String text, int index) {
-    return GestureDetector(
-      onTapDown: (details) {
+  InkWell period(String text, int index) {
+    return InkWell(
+      onTap: () {
         setState(() {
           nowOffset = 0.0;
           offset = offsets[index];
