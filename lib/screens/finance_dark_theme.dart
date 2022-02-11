@@ -119,18 +119,17 @@ class _FinanceDarkThemeState extends State<FinanceDarkTheme> {
             icon: StylishHouseIcon(
               width: size.width * 0.125,
             ),
-            title: Container(height: 0.0)),
+            label: ''),
         BottomNavigationBarItem(
-            icon: FolderIcon(size: size.width * 0.09),
-            title: Container(height: 0.0)),
+            icon: FolderIcon(size: size.width * 0.09), label: ''),
         BottomNavigationBarItem(
             icon: BarChartIcon(
                 width: size.width * 0.09, height: size.width * 0.09 / 1.3),
-            title: Container(height: 0.0)),
+            label: ''),
         BottomNavigationBarItem(
             icon: SimplerPersonIcon(
                 width: size.width * 0.09 * 0.66, height: size.width * 0.09),
-            title: Container(height: 0.0)),
+            label: ''),
       ],
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,

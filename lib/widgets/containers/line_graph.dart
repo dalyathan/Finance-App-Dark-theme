@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/model/data.dart';
-import 'package:portfolio/model/dummy_data.dart';
 import 'package:portfolio/widgets/images/line_graph_image.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:visibility_detector/visibility_detector.dart';
